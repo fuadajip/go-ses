@@ -89,7 +89,6 @@ func (m *mywishesAWS) SESSendEmail(serviceSES *ses.SES, bodySES *ses.SendEmailIn
 
 // NewAWS is an instance that implement MywishesAWS
 func NewAWS(config config.ImmutableConfig) MywishesAWS {
-	fmt.Println(config)
 	if config == nil {
 		panic("[APP CONFIG] immutable config required")
 	}

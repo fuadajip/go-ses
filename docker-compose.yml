@@ -1,0 +1,8 @@
+version: "3"
+services:
+  web:
+    container_name: mywishes-go-ses
+    image: registry.gitlab.com/mywishes/golang/go-ses:latest
+    ports:
+      - 4001:4001
+    

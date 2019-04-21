@@ -1,6 +1,8 @@
 package config
 
 import (
+	"fmt"
+	"os"
 	"sync"
 
 	"github.com/spf13/viper"
@@ -72,10 +74,11 @@ var (
 // NewImmutableConfig is a factory that return implementation of ImmutableConfig
 func NewImmutableConfig() ImmutableConfig {
 	imOnce.Do(func() {
+		env := os.Getenv("APP_ENV")
 		v := viper.New()
-		if myEnv["APP_ENV"] == "staging" {
+		if env == "staging" {
 			v.SetConfigName("app.config.staging")
-		} else if myEnv["APP_ENV"] == "production" {
+		} else if env == "production" {
 			v.SetConfigName("app.config.prod")
 		} else {
 			v.SetConfigName("app.config.dev")
@@ -86,7 +89,7 @@ func NewImmutableConfig() ImmutableConfig {
 		v.AutomaticEnv()
 
 		if err := v.ReadInConfig(); err != nil {
-			panic("[SES-CONF] failed reading env configuration")
+			panic(fmt.Sprintf("[SES-CONF] failed reading env configuration %s", err.Error()))
 		}
 
 		v.Unmarshal(&immutable)
