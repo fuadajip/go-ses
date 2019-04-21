@@ -1,0 +1,11 @@
+vendor/
+_*
+*.test
+.DS_Store
+
+.env
+!.env.sample
+app.config.dev.yml
+app.config.staging.yml
+app.config.prod.yml
+!app.config.sample.yml
