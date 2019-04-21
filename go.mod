@@ -2,7 +2,7 @@ module github.com/mywishes/go-ses
 
 require (
 	github.com/aws/aws-sdk-go v1.19.14
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fgrosse/goldi v1.0.1
 	github.com/go-playground/locales v0.12.1
 	github.com/go-playground/universal-translator v0.16.0 // indirect

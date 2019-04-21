@@ -3,12 +3,14 @@ package http
 import (
 	"net/http"
 
+	"github.com/mywishes/go-ses/models"
+	"github.com/mywishes/go-ses/shared/config"
 	"github.com/mywishes/go-ses/shared/logger"
 	"github.com/mywishes/go-ses/shared/util"
 
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"github.com/mywishes/go-ses/domain/transactional"
-	"github.com/mywishes/go-ses/models"
 )
 
 type (
@@ -18,7 +20,8 @@ type (
 )
 
 var (
-	log = logger.NewMywishesLogger()
+	log  = logger.NewMywishesLogger()
+	conf = config.NewImmutableConfig()
 )
 
 // AddTransactionalHandler return http handler for transactional
@@ -27,6 +30,7 @@ func AddTransactionalHandler(e *echo.Echo, usecase transactional.Usecase) {
 		usecase: usecase,
 	}
 
+	e.Use(middleware.JWT([]byte(conf.GetMywishesSecretKey())))
 	e.POST("/api/transactional/v1/ses", handler.SendDefaultTransactional)
 }
 

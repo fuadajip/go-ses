@@ -16,6 +16,7 @@ type (
 		GetAWSSecretAccessKey() string
 		GetAWSSessionToken() string
 		GetAWSSESMailFrom() string
+		GetMywishesSecretKey() string
 	}
 
 	im struct {
@@ -26,6 +27,7 @@ type (
 		AWSSecretAccessKey string `mapstructure:"AWS_SECRET_ACCESS_KEY"`
 		AWSSessionToken    string `mapstructure:"AWS_SESSION_TOKEN"`
 		AWSSESMailFrom     string `mapstructure:"AWS_SES_MAIL_FROM"`
+		MywishesSecretKey  string `mapstructure:"MYWISHES_SECRET_KEY"`
 	}
 )
 
@@ -55,6 +57,10 @@ func (i *im) GetAWSSessionToken() string {
 
 func (i *im) GetAWSSESMailFrom() string {
 	return i.AWSSESMailFrom
+}
+
+func (i *im) GetMywishesSecretKey() string {
+	return i.MywishesSecretKey
 }
 
 var (
