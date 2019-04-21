@@ -13,6 +13,7 @@ import (
 	"github.com/mywishes/go-ses/shared/util"
 
 	transactionalHandler "github.com/mywishes/go-ses/domain/transactional/delivery/http"
+	transactionalRepository "github.com/mywishes/go-ses/domain/transactional/repository"
 	transactionalUsecase "github.com/mywishes/go-ses/domain/transactional/usecase"
 )
 
@@ -57,7 +58,9 @@ func main() {
 		}
 	})
 
-	transactionalUcase := transactionalUsecase.NewTransactionalUsecase()
+	// transactional architecture
+	transactionalRepo := transactionalRepository.NewAWSRepository(awsSession)
+	transactionalUcase := transactionalUsecase.NewTransactionalUsecase(transactionalRepo)
 	transactionalHandler.AddTransactionalHandler(e, transactionalUcase)
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", conf.GetPort())))

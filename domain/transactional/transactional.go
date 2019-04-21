@@ -10,3 +10,8 @@ import (
 type Usecase interface {
 	SendDefaultTransactional(c echo.Context, body *models.Transactional) (result *ses.SendEmailOutput, err error)
 }
+
+// Repository is an interface of Transactional that return implementation of Transactional's methods
+type Repository interface {
+	SendDefaultTransactional(bodySES *models.Transactional) (res *ses.SendEmailOutput, err error)
+}
